@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FICHE DE RÉVISION — Biologie Moléculaire</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+  :root {
+    --neon-blue: #00f0ff;
+    --neon-green: #39ff14;
+    --neon-pink: #ff006e;
+    --neon-yellow: #ffe600;
+    --neon-purple: #bf5fff;
+    --neon-orange: #ff8c00;
+    --dark-bg: #0a0a1a;
+    --card-bg: #0d0d2b;
+    --card-border: #1a1a4e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--dark-bg);
+    color: #e0e0ff;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    overflow-x: hidden;
+  }
+
+  /* Scanline overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.05) 2px,
+      rgba(0,0,0,0.05) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  .stars {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(0,240,255,0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 20%, rgba(191,95,255,0.03) 0%, transparent 50%);
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    text-align: center;
+    padding: 30px 20px 20px;
+    position: relative;
+  }
+
+  .header::before {
+    content: '████████████████████████████████████████████████████████████████████████████';
+    display: block;
+    color: var(--neon-blue);
+    font-size: 8px;
+    opacity: 0.3;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+
+  .level-badge {
+    display: inline-block;
+    background: var(--neon-pink);
+    color: #000;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 8px;
+    padding: 4px 10px;
+    margin-bottom: 10px;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 10px var(--neon-pink); }
+    50% { box-shadow: 0 0 25px var(--neon-pink), 0 0 50px rgba(255,0,110,0.4); }
+  }
+
+  .main-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--neon-blue);
+    text-shadow: 0 0 20px var(--neon-blue), 0 0 40px rgba(0,240,255,0.4);
+    letter-spacing: 3px;
+    line-height: 1.3;
+    margin-bottom: 5px;
+  }
+
+  .sub-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 13px;
+    color: var(--neon-purple);
+    text-shadow: 0 0 10px var(--neon-purple);
+    letter-spacing: 6px;
+  }
+
+  .xp-bar-container {
+    margin: 15px auto;
+    max-width: 400px;
+  }
+
+  .xp-label {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    color: var(--neon-yellow);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+
+  .xp-bar {
+    height: 10px;
+    background: #1a1a1a;
+    border: 1px solid var(--neon-yellow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .xp-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--neon-yellow), #ff8c00);
+    width: 72%;
+    animation: xp-glow 2s infinite alternate;
+  }
+
+  @keyframes xp-glow {
+    from { box-shadow: 0 0 5px var(--neon-yellow); }
+    to { box-shadow: 0 0 15px var(--neon-yellow), 0 0 30px rgba(255,230,0,0.5); }
+  }
+
+  /* ─── GRID LAYOUT ─── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 20px;
+  }
+
+  .col-wide { grid-column: span 2; }
+  .col-full { grid-column: span 3; }
+
+  /* ─── CARDS ─── */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 14px;
+    position: relative;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    border: 1px solid transparent;
+    background: var(--glow-color, var(--neon-blue)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    opacity: 0.6;
+  }
+
+  .card:hover::before { opacity: 1; }
+  .card:hover { transform: translateY(-2px); transition: transform 0.2s; }
+
+  .card-blue { --glow-color: var(--neon-blue); }
+  .card-green { --glow-color: var(--neon-green); }
+  .card-pink { --glow-color: var(--neon-pink); }
+  .card-purple { --glow-color: var(--neon-purple); }
+  .card-yellow { --glow-color: var(--neon-yellow); }
+  .card-orange { --glow-color: var(--neon-orange); }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .card-icon {
+    font-size: 18px;
+    filter: drop-shadow(0 0 4px currentColor);
+  }
+
+  .card-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .card-blue .card-title { color: var(--neon-blue); text-shadow: 0 0 8px var(--neon-blue); }
+  .card-green .card-title { color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green); }
+  .card-pink .card-title { color: var(--neon-pink); text-shadow: 0 0 8px var(--neon-pink); }
+  .card-purple .card-title { color: var(--neon-purple); text-shadow: 0 0 8px var(--neon-purple); }
+  .card-yellow .card-title { color: var(--neon-yellow); text-shadow: 0 0 8px var(--neon-yellow); }
+  .card-orange .card-title { color: var(--neon-orange); text-shadow: 0 0 8px var(--neon-orange); }
+
+  .card-lvl {
+    margin-left: auto;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 2px 6px;
+    color: #aaa;
+  }
+
+  /* ─── CONTENT ELEMENTS ─── */
+  ul { list-style: none; padding: 0; }
+
+  li {
+    padding: 3px 0 3px 16px;
+    position: relative;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+  }
+
+  li:last-child { border-bottom: none; }
+
+  li::before {
+    content: '▶';
+    position: absolute;
+    left: 0;
+    font-size: 7px;
+    top: 6px;
+  }
+
+  .card-blue li::before { color: var(--neon-blue); }
+  .card-green li::before { color: var(--neon-green); }
+  .card-pink li::before { color: var(--neon-pink); }
+  .card-purple li::before { color: var(--neon-purple); }
+  .card-yellow li::before { color: var(--neon-yellow); }
+  .card-orange li::before { color: var(--neon-orange); }
+
+  .tag {
+    display: inline-block;
+    padding: 1px 6px;
+    font-size: 10px;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6px;
+    margin: 1px 2px;
+    border: 1px solid currentColor;
+  }
+
+  .tag-blue { color: var(--neon-blue); background: rgba(0,240,255,0.08); }
+  .tag-green { color: var(--neon-green); background: rgba(57,255,20,0.08); }
+  .tag-pink { color: var(--neon-pink); background: rgba(255,0,110,0.08); }
+  .tag-purple { color: var(--neon-purple); background: rgba(191,95,255,0.08); }
+  .tag-yellow { color: var(--neon-yellow); background: rgba(255,230,0,0.08); }
+  .tag-orange { color: var(--neon-orange); background: rgba(255,140,0,0.08); }
+
+  .highlight {
+    color: var(--neon-yellow);
+    font-weight: bold;
+  }
+
+  .warn {
+    color: var(--neon-pink);
+    font-weight: bold;
+  }
+
+  .formula {
+    background: rgba(0,240,255,0.06);
+    border-left: 2px solid var(--neon-blue);
+    padding: 5px 8px;
+    margin: 6px 0;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ─── ITEM TABLES ─── */
+  .item-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .item-row:last-child { border-bottom: none; }
+
+  .item-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    min-width: 90px;
+    padding-top: 1px;
+  }
+
+  .item-desc {
+    flex: 1;
+    line-height: 1.6;
+    color: #c0c0d0;
+  }
+
+  /* ─── PCR CYCLE VISUAL ─── */
+  .cycle-steps {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+  }
+
+  .cycle-step {
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+    padding: 8px 5px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+  }
+
+  .cycle-step .temp {
+    font-family: 'Orbitron', monospace;
+    font-size: 14px;
+    font-weight: 900;
+    display: block;
+  }
+
+  .cycle-step .action {
+    font-size: 9px;
+    color: #aaa;
+    display: block;
+    margin-top: 3px;
+  }
+
+  .cycle-step.step1 { border-color: var(--neon-pink); }
+  .cycle-step.step1 .temp { color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink); }
+
+  .cycle-step.step2 { border-color: var(--neon-blue); }
+  .cycle-step.step2 .temp { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
+
+  .cycle-step.step3 { border-color: var(--neon-green); }
+  .cycle-step.step3 .temp { color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); }
+
+  .arrow {
+    color: var(--neon-yellow);
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+
+  /* ─── VECTOR TABLE ─── */
+  .vec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+  }
+
+  .vec-table th {
+    font-family: 'Orbitron', monospace;
+    font-size: 8px;
+    color: var(--neon-purple);
+    text-align: left;
+    padding: 5px 6px;
+    border-bottom: 1px solid rgba(191,95,255,0.3);
+    letter-spacing: 1px;
+  }
+
+  .vec-table td {
+    padding: 5px 6px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: #c0c0d0;
+    vertical-align: top;
+  }
+
+  .vec-table tr:last-child td { border-bottom: none; }
+
+  .vec-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  .vec-name {
+    font-family: 'Orbitron', monospace;
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--neon-purple);
+  }
+
+  /* ─── STAT BARS ─── */
+  .stat-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 4px 0;
+  }
+
+  .stat-label {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6px;
+    min-width: 85px;
+    color: #aaa;
+  }
+
+  .stat-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .stat-fill {
+    height: 100%;
+  }
+
+  .stat-val {
+    font-size: 10px;
+    min-width: 35px;
+    text-align: right;
+    color: #ddd;
+  }
+
+  /* ─── 2D-PAGE DIAGRAM ─── */
+  .diagram-2d {
+    position: relative;
+    height: 120px;
+    border-left: 2px solid var(--neon-green);
+    border-bottom: 2px solid var(--neon-green);
+    margin: 10px 10px 10px 30px;
+  }
+
+  .axis-label-y {
+    position: absolute;
+    left: -28px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6px;
+    color: var(--neon-green);
+    white-space: nowrap;
+  }
+
+  .axis-label-x {
+    position: absolute;
+    bottom: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6px;
+    color: var(--neon-green);
+  }
+
+  .dot {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--neon-green);
+    box-shadow: 0 0 6px var(--neon-green);
+    animation: blink 3s infinite;
+  }
+
+  @keyframes blink {
+    0%, 90%, 100% { opacity: 1; }
+    95% { opacity: 0.2; }
+  }
+
+  .dot-label {
+    position: absolute;
+    font-size: 8px;
+    color: #aaa;
+    white-space: nowrap;
+  }
+
+  /* ─── IMMUNITY BADGES ─── */
+  .immunity-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .immunity-card {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 8px;
+    text-align: center;
+  }
+
+  .immunity-card .imm-title {
+    font-family: 'Orbitron', monospace;
+    font-size: 9px;
+    margin-bottom: 5px;
+  }
+
+  .imm-innate .imm-title { color: var(--neon-orange); }
+  .imm-adapt .imm-title { color: var(--neon-blue); }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .footer-text {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 3px;
+  }
+
+  .section-divider {
+    grid-column: span 3;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 6px 0;
+  }
+
+  .section-divider-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--div-color, #333), transparent);
+  }
+
+  .section-divider-text {
+    font-family: 'Orbitron', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+  }
+
+  .div-blue { --div-color: var(--neon-blue); color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
+  .div-green { --div-color: var(--neon-green); color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); }
+  .div-orange { --div-color: var(--neon-orange); color: var(--neon-orange); text-shadow: 0 0 10px var(--neon-orange); }
+
+  /* ─── SCROLLING TICKER ─── */
+  .ticker {
+    overflow: hidden;
+    background: rgba(0,240,255,0.05);
+    border-top: 1px solid rgba(0,240,255,0.2);
+    border-bottom: 1px solid rgba(0,240,255,0.2);
+    padding: 6px 0;
+    margin: 15px 0;
+  }
+
+  .ticker-inner {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker 30s linear infinite;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    color: var(--neon-blue);
+    padding-left: 100%;
+  }
+
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+
+  /* ─── MINI BADGE ─── */
+  .mini-badge {
+    display: inline-block;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 6px;
+    padding: 2px 5px;
+    margin-right: 3px;
+    border: 1px solid currentColor;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+
+<div class="wrapper">
+
+  <!-- ══════════════════════════════════ HEADER ══════════════════════════════════ -->
+  <div class="header">
+    <div class="level-badge">✦ CHAPITRE DÉBLOQUÉ ✦</div>
+    <div class="main-title">BIOLOGIE MOLÉCULAIRE<br>GÉNOMIQUE & PROTÉOMIQUE</div>
+    <div class="sub-title">FICHE DE RÉVISION</div>
+    <div class="xp-bar-container">
+      <div class="xp-label">
+        <span>🧬 XP DE CONNAISSANCE</span>
+        <span>72 / 100</span>
+      </div>
+      <div class="xp-bar">
+        <div class="xp-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════ TICKER ══════════════════════════════════ -->
+  <div class="ticker">
+    <span class="ticker-inner">
+      ▶ ENZYMES DE RESTRICTION &nbsp;&nbsp; ◆ &nbsp;&nbsp; PCR TEMPS RÉEL &nbsp;&nbsp; ◆ &nbsp;&nbsp; SÉQUENÇAGE SANGER &nbsp;&nbsp; ◆ &nbsp;&nbsp; SDS-PAGE &nbsp;&nbsp; ◆ &nbsp;&nbsp; WESTERN BLOT &nbsp;&nbsp; ◆ &nbsp;&nbsp; CRISPR-CAS9 &nbsp;&nbsp; ◆ &nbsp;&nbsp; NGS &nbsp;&nbsp; ◆ &nbsp;&nbsp; SOUTHERN BLOT &nbsp;&nbsp; ◆ &nbsp;&nbsp; 2D-PAGE &nbsp;&nbsp; ◆ &nbsp;&nbsp; CLONAGE &nbsp;&nbsp; ◆ &nbsp;&nbsp; IMMUNODÉTECTION &nbsp;&nbsp; ◆ &nbsp;&nbsp;
+    </span>
+  </div>
+
+  <div class="grid">
+
+    <!-- ══════════════════ SECTION 1 : BIOLOGIE MOLÉCULAIRE ══════════════════ -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <div class="section-divider-text div-blue">🧬 BIOLOGIE MOLÉCULAIRE & GÉNOMIQUE</div>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <!-- CARD: ENZYMES -->
+    <div class="card card-pink">
+      <div class="card-header">
+        <span class="card-icon">⚔️</span>
+        <div class="card-title">Enzymes — Réactifs</div>
+        <span class="card-lvl">LVL 1</span>
+      </div>
+      <div class="item-row">
+        <div class="item-name" style="color:var(--neon-pink)">RESTRICTION</div>
+        <div class="item-desc">Coupent sites spécifiques (<span class="highlight">palindromes</span>). Bouts <span class="tag tag-blue">francs</span> ou <span class="tag tag-pink">collants</span></div>
+      </div>
+      <div class="item-row">
+        <div class="item-name" style="color:var(--neon-blue)">ADN POLYMÉR.</div>
+        <div class="item-desc">Amplification de l'ADN</div>
+      </div>
+      <div class="item-row">
+        <div class="item-name" style="color:var(--neon-green)">TRANSCRIPTASE</div>
+        <div class="item-desc"><span class="highlight">ARN → ADN</span> (réverse)</div>
+      </div>
+      <div class="item-row">
+        <div class="item-name" style="color:var(--neon-yellow)">LIGASE</div>
+        <div class="item-desc">Lie les fragments</div>
+      </div>
+      <div class="item-row">
+        <div class="item-name" style="color:var(--neon-purple)">TRANSFÉRASE</div>
+        <div class="item-desc">Déplace un groupement</div>
+      </div>
+      <div class="item-row">
+        <div class="item-name" style="color:var(--neon-orange)">KINASE</div>
+        <div class="item-desc">Ajoute un <span class="highlight">phosphate</span></div>
+      </div>
+    </div>
+
+    <!-- CARD: SONDES & AMORCES -->
+    <div class="card card-blue">
+      <div class="card-header">
+        <span class="card-icon">🎯</span>
+        <div class="card-title">Sondes & Amorces</div>
+        <span class="card-lvl">LVL 1</span>
+      </div>
+      <ul>
+        <li>Oligonucléotides de <span class="highlight">20–30 nt</span></li>
+        <li><span class="tag tag-blue">AMORCE</span> Hybridation sur la cible → élongation</li>
+        <li><span class="tag tag-pink">SONDE</span> = amorce <span class="highlight">marquée</span> (fluorophore)</li>
+        <li>Ex. <span class="highlight">SYBR Green</span> intercalant dans l'ADN db</li>
+        <li>Signal ∝ quantité d'amplicons → <em>quantitatif</em></li>
+      </ul>
+    </div>
+
+    <!-- CARD: VECTEURS -->
+    <div class="card card-purple col-wide">
+      <div class="card-header">
+        <span class="card-icon">🧫</span>
+        <div class="card-title">Vecteurs de Clonage — Insert + Vecteur</div>
+        <span class="card-lvl">LVL 2</span>
+      </div>
+      <table class="vec-table">
+        <thead>
+          <tr>
+            <th>VECTEUR</th>
+            <th>TAILLE INSERT</th>
+            <th>ENTRÉE</th>
+            <th>CARACTÉRISTIQUES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="vec-name">PLASMIDE</span></td>
+            <td><span class="highlight">≤ 10 kpb</span></td>
+            <td><span class="tag tag-blue">Transf.</span></td>
+            <td>ADN db circulaire · gène résistance ATB · polylinker · ORI</td>
+          </tr>
+          <tr>
+            <td><span class="vec-name">COSMIDE</span></td>
+            <td><span class="highlight">10–50 kpb</span></td>
+            <td><span class="tag tag-green">Transf.</span></td>
+            <td>Hybride plasmide/phage</td>
+          </tr>
+          <tr>
+            <td><span class="vec-name">PHAGE</span></td>
+            <td><span class="highlight">10–20 kpb</span></td>
+            <td><span class="tag tag-pink">Injection</span></td>
+            <td>Infecte la bactérie directement</td>
+          </tr>
+          <tr>
+            <td><span class="vec-name">YAC</span></td>
+            <td><span class="highlight">100–1000 kpb</span></td>
+            <td><span class="tag tag-yellow">Transf.</span></td>
+            <td>Chromosome artificiel de levure</td>
+          </tr>
+          <tr>
+            <td><span class="vec-name">V. EXPRESSION</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td>Promoteur + site fixation ribosomes · <span class="warn">⚠ bactérie ≠ traduction humaine</span> (introns!)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CARD: EXTRACTION / PURETÉ -->
+    <div class="card card-yellow">
+      <div class="card-header">
+        <span class="card-icon">🔬</span>
+        <div class="card-title">Extraction & Pureté</div>
+        <span class="card-lvl">LVL 2</span>
+      </div>
+      <ul>
+        <li>Lyse : <span class="tag tag-yellow">mécanique</span> <span class="tag tag-yellow">congélation</span> <span class="tag tag-yellow">lysozyme</span> <span class="tag tag-yellow">ultrasons</span> <span class="tag tag-yellow">détergents</span></li>
+        <li>Puis purification de l'acide nucléique</li>
+      </ul>
+      <div class="formula">
+        PURETÉ : <span class="highlight">A<sub>260</sub> / A<sub>280</sub> &gt; 2</span><br>
+        ADN → abs. 260 nm | Protéines → 280 nm
+      </div>
+      <ul>
+        <li>Ratio &lt; 2 → contamination protéique</li>
+      </ul>
+    </div>
+
+    <!-- CARD: ELECTROPHORÈSE -->
+    <div class="card card-blue">
+      <div class="card-header">
+        <span class="card-icon">⚡</span>
+        <div class="card-title">Électrophorèse Agarose</div>
+        <span class="card-lvl">LVL 2</span>
+      </div>
+      <ul>
+        <li>ADN chargé <span class="warn">négatif (−)</span> migre vers <span class="highlight">anode (+)</span></li>
+        <li>Séparation selon la <span class="highlight">taille</span></li>
+        <li><span class="tag tag-blue">PFGE</span> gros fragments &gt;50 kpb via 4 électrodes</li>
+      </ul>
+      <div style="margin-top:10px;">
+        <div class="stat-row">
+          <span class="stat-label">SOUTHERN (ADN)</span>
+          <div class="stat-bar"><div class="stat-fill" style="width:100%;background:var(--neon-blue);"></div></div>
+          <span class="stat-val" style="font-size:8px;">dénatura.</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">NORTHERN (ARN)</span>
+          <div class="stat-bar"><div class="stat-fill" style="width:100%;background:var(--neon-green);"></div></div>
+          <span class="stat-val" style="font-size:8px;">RNase!</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">RFLP</span>
+          <div class="stat-bar"><div class="stat-fill" style="width:75%;background:var(--neon-pink);"></div></div>
+          <span class="stat-val" style="font-size:8px;">mutations</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD: PCR -->
+    <div class="card card-green col-full">
+      <div class="card-header">
+        <span class="card-icon">🔄</span>
+        <div class="card-title">PCR — Amplification</div>
+        <span class="card-lvl">LVL 3</span>
+      </div>
+      <div class="cycle-steps">
+        <div class="cycle-step step1">
+          <span class="temp">95°C</span>
+          <span class="action">DÉNATURATION<br>séparation brins</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="cycle-step step2">
+          <span class="temp">40–70°C</span>
+          <span class="action">HYBRIDATION<br>amorces → cible</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="cycle-step step3">
+          <span class="temp">72°C</span>
+          <span class="action">ÉLONGATION<br>Taq polymér.</span>
+        </div>
+        <div class="arrow">→</div>
+        <div style="text-align:center;flex:0.5">
+          <span style="font-family:'Orbitron',monospace;font-size:11px;color:var(--neon-green);">∞ ×30</span><br>
+          <span style="font-size:9px;color:#aaa;">AMPLICON</span>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;">
+        <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(57,255,20,0.3);padding:8px;">
+          <div style="font-family:'Orbitron',monospace;font-size:8px;color:var(--neon-green);margin-bottom:4px;">PCR TEMPS RÉEL</div>
+          <div style="color:#c0c0d0;font-size:11px;">Sonde fluorescente · <span class="highlight">quantitatif</span> · SYBR Green</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(57,255,20,0.3);padding:8px;">
+          <div style="font-family:'Orbitron',monospace;font-size:8px;color:var(--neon-green);margin-bottom:4px;">RT-PCR</div>
+          <div style="color:#c0c0d0;font-size:11px;"><span class="highlight">ARN → ADNc</span> (transcriptase réverse) puis PCR classique</div>
+        </div>
+        <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(57,255,20,0.3);padding:8px;">
+          <div style="font-family:'Orbitron',monospace;font-size:8px;color:var(--neon-green);margin-bottom:4px;">NESTED PCR</div>
+          <div style="color:#c0c0d0;font-size:11px;">2 PCR successives · <span class="highlight">spécificité d'espèce</span> maximale</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD: SÉQUENÇAGE -->
+    <div class="card card-orange col-wide">
+      <div class="card-header">
+        <span class="card-icon">📡</span>
+        <div class="card-title">Séquençage & Technologies</div>
+        <span class="card-lvl">LVL 4</span>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+        <div>
+          <div class="item-row">
+            <div class="item-name" style="color:var(--neon-orange)">SANGER</div>
+            <div class="item-desc"><span class="highlight">ddNTP</span> marqués → arrêt d'élongation · électrophorèse</div>
+          </div>
+          <div class="item-row">
+            <div class="item-name" style="color:var(--neon-orange)">NGS</div>
+            <div class="item-desc">Génome inconnu · <span class="highlight">métagénomique</span> · haut débit</div>
+          </div>
+          <div class="item-row">
+            <div class="item-name" style="color:var(--neon-orange)">SOLEXA</div>
+            <div class="item-desc">Brin simple + adaptateurs + nts <span class="highlight">fluorescents</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="item-row">
+            <div class="item-name" style="color:var(--neon-orange)">PUCES ADN</div>
+            <div class="item-desc"><span class="highlight">Transcriptome</span> — gènes exprimés (ARNm)</div>
+          </div>
+          <div class="item-row">
+            <div class="item-name" style="color:var(--neon-pink)">CRISPR-Cas9</div>
+            <div class="item-desc"><span class="warn">✂ Ciseaux moléculaires</span> · édition génome · thérapie génique</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARD: CRISPR visual -->
+    <div class="card card-pink">
+      <div class="card-header">
+        <span class="card-icon">✂️</span>
+        <div class="card-title">CRISPR-Cas9</div>
+        <span class="card-lvl">BOSS</span>
+      </div>
+      <div style="text-align:center;padding:10px 0;">
+        <div style="font-family:'Press Start 2P',monospace;font-size:8px;color:var(--neon-pink);line-height:2.5;">
+          ARNg guide<br>
+          <span style="color:#555;">↓</span><br>
+          <span style="color:var(--neon-blue);">CAS9</span> <span style="color:var(--neon-yellow);">+</span> <span style="color:var(--neon-green);">ADN cible</span><br>
+          <span style="color:#555;">↓</span><br>
+          <span class="warn">COUPURE DOUBLE BRIN</span>
+        </div>
+      </div>
+      <ul>
+        <li>Édition génomique précise</li>
+        <li>Thérapie génique in vivo</li>
+        <li>KO / knock-in de gènes</li>
+      </ul>
+    </div>
+
+    <!-- ══════════════════ SECTION 2 : PROTÉOMIQUE ══════════════════ -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <div class="section-divider-text div-green">🧪 PROTÉOMIQUE</div>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <!-- CARD: EXTRACTION PROTÉIQUE -->
+    <div class="card card-green">
+      <div class="card-header">
+        <span class="card-icon">🧪</span>
+        <div class="card-title">Extraction Protéique</div>
+        <span class="card-lvl">LVL 2</span>
+      </div>
+      <ul>
+        <li>Lyse cellulaire puis <span class="highlight">agents de solubilisation</span></li>
+        <li><span class="tag tag-green">Chaotropes</span> urée — dénature les protéines</li>
+        <li><span class="tag tag-green">Détergents</span> Triton — solubilise membranes</li>
+        <li><span class="tag tag-green">Réducteurs</span> DTT — brise ponts S-S</li>
+        <li><span class="tag tag-pink">Inhibiteurs</span> de protéases — évite dégradation</li>
+        <li>Contrôler : <span class="highlight">pH, T°, concentration en sels</span></li>
+      </ul>
+    </div>
+
+    <!-- CARD: SDS-PAGE + IEF -->
+    <div class="card card-blue">
+      <div class="card-header">
+        <span class="card-icon">📊</span>
+        <div class="card-title">SDS-PAGE & IEF</div>
+        <span class="card-lvl">LVL 2</span>
+      </div>
+      <div class="formula">
+        <span style="color:var(--neon-blue);">SDS-PAGE</span> → neutralise les charges →<br>
+        séparation selon la <span class="highlight">TAILLE (MM)</span>
+      </div>
+      <div class="formula" style="border-left-color:var(--neon-green);">
+        <span style="color:var(--neon-green);">R<sub>f</sub></span> = dist. migration ÷ dist. bleu de bromophénol
+      </div>
+      <div class="formula" style="border-left-color:var(--neon-purple);">
+        <span style="color:var(--neon-purple);">IEF</span> → séparation selon le <span class="highlight">pH isoélectrique</span><br>
+        (protéine globalement neutre = pHi)
+      </div>
+    </div>
+
+    <!-- CARD: 2D-PAGE -->
+    <div class="card card-green">
+      <div class="card-header">
+        <span class="card-icon">🗺️</span>
+        <div class="card-title">2D-PAGE & 2D-DIGE</div>
+        <span class="card-lvl">LVL 3</span>
+      </div>
+      <div class="diagram-2d">
+        <div class="axis-label-y">MM (taille)</div>
+        <div class="axis-label-x">pHi (charge)</div>
+        <!-- Dots simulating protein spots -->
+        <div class="dot" style="left:15%;bottom:70%;"></div>
+        <div class="dot" style="left:30%;bottom:45%;"></div>
+        <div class="dot" style="left:50%;bottom:80%;"></div>
+        <div class="dot" style="left:60%;bottom:30%;"></div>
+        <div class="dot" style="left:70%;bottom:55%;"></div>
+        <div class="dot" style="left:80%;bottom:20%;"></div>
+        <div class="dot" style="left:40%;bottom:60%;"></div>
+        <div class="dot" style="left:85%;bottom:65%;"></div>
+        <div class="dot-label" style="right:5%;bottom:85%;color:var(--neon-green);font-size:7px;">SPOTS</div>
+      </div>
+      <ul>
+        <li><span class="tag tag-green">2D-PAGE</span> IEF (axe X = pHi) <strong>puis</strong> SDS-PAGE (axe Y = MM)</li>
+        <li><span class="tag tag-blue">2D-DIGE</span> 2D + fluorophores <span class="highlight">Cy3 / Cy5</span> → quantitatif</li>
+      </ul>
+    </div>
+
+    <!-- CARD: WESTERN BLOT -->
+    <div class="card card-purple col-wide">
+      <div class="card-header">
+        <span class="card-icon">🖨️</span>
+        <div class="card-title">Western Blot — Immunodétection</div>
+        <span class="card-lvl">LVL 3</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:15px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:8px;flex:1;min-width:250px;">
+          <!-- Step by step flow -->
+          <div style="text-align:center;padding:6px 8px;background:rgba(191,95,255,0.08);border:1px solid rgba(191,95,255,0.3);">
+            <div style="font-family:'Press Start 2P',monospace;font-size:7px;color:var(--neon-purple);">1</div>
+            <div style="font-size:10px;margin-top:3px;">SDS-PAGE<br><span style="color:#aaa;font-size:9px;">séparation</span></div>
+          </div>
+          <div style="color:var(--neon-yellow);">→</div>
+          <div style="text-align:center;padding:6px 8px;background:rgba(191,95,255,0.08);border:1px solid rgba(191,95,255,0.3);">
+            <div style="font-family:'Press Start 2P',monospace;font-size:7px;color:var(--neon-purple);">2</div>
+            <div style="font-size:10px;margin-top:3px;">TRANSFERT<br><span style="color:#aaa;font-size:9px;">électrique</span></div>
+          </div>
+          <div style="color:var(--neon-yellow);">→</div>
+          <div style="text-align:center;padding:6px 8px;background:rgba(191,95,255,0.08);border:1px solid rgba(191,95,255,0.3);">
+            <div style="font-family:'Press Start 2P',monospace;font-size:7px;color:var(--neon-purple);">3</div>
+            <div style="font-size:10px;margin-top:3px;">MEMBRANE<br><span style="color:#aaa;font-size:9px;">nitroc./nylon</span></div>
+          </div>
+          <div style="color:var(--neon-yellow);">→</div>
+          <div style="text-align:center;padding:6px 8px;background:rgba(191,95,255,0.08);border:1px solid rgba(191,95,255,0.3);">
+            <div style="font-family:'Press Start 2P',monospace;font-size:7px;color:var(--neon-pink);">4</div>
+            <div style="font-size:10px;margin-top:3px;">Ac. 1° + 2°<br><span style="color:#aaa;font-size:9px;">immuno-détest.</span></div>
+          </div>
+        </div>
+        <div style="flex:0.5;min-width:150px;">
+          <ul>
+            <li>Anticorps <span class="highlight">primaire</span> → cible spécifique</li>
+            <li>Anticorps <span class="highlight">secondaire</span> couplé enzyme/fluo</li>
+            <li>Révélation : chimiluminescence / colorimétrie</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ SECTION 3 : IMMUNOLOGIE ══════════════════ -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <div class="section-divider-text div-orange">🛡 IMMUNOLOGIE</div>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <!-- CARD: IMMUNITÉ -->
+    <div class="card card-orange col-full">
+      <div class="card-header">
+        <span class="card-icon">🛡️</span>
+        <div class="card-title">Immunité — Innée vs Adaptative</div>
+        <span class="card-lvl">LVL 2</span>
+      </div>
+      <div class="immunity-grid">
+        <div class="immunity-card imm-innate">
+          <div class="imm-title">⚡ INNÉE</div>
+          <ul style="text-align:left;">
+            <li>Réponse <span class="highlight">immédiate</span> (&lt;4h)</li>
+            <li>Non spécifique</li>
+            <li>Barrières physiques (peau, muqueuses)</li>
+            <li>Cellules : macrophages, NK, neutrophiles</li>
+            <li>Complément, cytokines, inflammation</li>
+          </ul>
+        </div>
+        <div class="immunity-card imm-adapt">
+          <div class="imm-title">🎯 ADAPTATIVE</div>
+          <ul style="text-align:left;">
+            <li>Réponse <span class="highlight">tardive</span> (jours–semaines)</li>
+            <li>Spécifique à l'antigène</li>
+            <li>Lymphocytes <span class="highlight">B</span> → anticorps (humorale)</li>
+            <li>Lymphocytes <span class="highlight">T</span> → cytotoxique / helper</li>
+            <li>Mémoire immunitaire → 2e réponse rapide</li>
+          </ul>
+        </div>
+      </div>
+      <div style="margin-top:10px;background:rgba(0,0,0,0.3);border:1px solid rgba(255,140,0,0.2);padding:10px;">
+        <div style="font-family:'Orbitron',monospace;font-size:9px;color:var(--neon-orange);margin-bottom:6px;">▶ MOYENS DE DÉFENSE</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="tag tag-orange">Barrières physiques</span>
+          <span class="tag tag-orange">Phagocytose</span>
+          <span class="tag tag-orange">Cytokines / interférons</span>
+          <span class="tag tag-orange">Complément</span>
+          <span class="tag tag-blue">Anticorps (IgG, IgM...)</span>
+          <span class="tag tag-blue">LT cytotoxiques (CD8)</span>
+          <span class="tag tag-blue">LT helper (CD4)</span>
+          <span class="tag tag-blue">LB → plasmocytes</span>
+          <span class="tag tag-pink">CMH I & II</span>
+          <span class="tag tag-green">Mémoire B & T</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════════════ RÉCAP FORMULES CLÉS ══════════════════ -->
+    <div class="card card-yellow col-full" style="margin-top:5px;">
+      <div class="card-header">
+        <span class="card-icon">⭐</span>
+        <div class="card-title">Formules & Points Clés à Retenir</div>
+        <span class="card-lvl">BOSS FINAL</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+        <div class="formula" style="border-left-color:var(--neon-yellow);">
+          <span style="color:var(--neon-yellow);font-family:'Orbitron',monospace;font-size:8px;">PURETÉ ADN</span><br>
+          A₂₆₀/A₂₈₀ &gt; 2
+        </div>
+        <div class="formula" style="border-left-color:var(--neon-green);">
+          <span style="color:var(--neon-green);font-family:'Orbitron',monospace;font-size:8px;">Rf (PAGE)</span><br>
+          d.migration / d.bleu bromo.
+        </div>
+        <div class="formula" style="border-left-color:var(--neon-blue);">
+          <span style="color:var(--neon-blue);font-family:'Orbitron',monospace;font-size:8px;">PCR</span><br>
+          95°C → 40-70°C → 72°C
+        </div>
+        <div class="formula" style="border-left-color:var(--neon-pink);">
+          <span style="color:var(--neon-pink);font-family:'Orbitron',monospace;font-size:8px;">BLOTS</span><br>
+          South.=ADN · North.=ARN · West.=Protéine
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /grid -->
+
+  <div class="footer">
+    <div class="footer-text">◈ — BONNE CHANCE POUR TES RÉVISIONS — ◈</div>
+    <div style="margin-top:8px;font-family:'Press Start 2P',monospace;font-size:6px;color:rgba(255,255,255,0.1);letter-spacing:2px;">ALL KNOWLEDGE ITEMS UNLOCKED · PRESS START TO EXAM</div>
+  </div>
+
+</div><!-- /wrapper -->
+</body>
+</html>
