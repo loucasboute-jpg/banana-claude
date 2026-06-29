@@ -1169,99 +1169,94 @@ const SECTION_LABELS = [
 
 const QUESTIONS = [
   {
-    q: "Quelle enzyme coupe l'ADN au niveau de séquences palindromiques ?",
-    opts: ["Ligase", "Enzyme de restriction", "Kinase", "Transférase"],
+    q: "À quoi sert l'ORI dans un plasmide ?",
+    opts: ["Conférer la résistance aux antibiotiques", "Permettre la réplication autonome du plasmide", "Accueillir l'insert étranger", "Démarrer la transcription"],
     ans: 1,
-    expl: "Les enzymes de restriction reconnaissent des séquences palindromiques spécifiques et coupent l'ADN en bouts francs ou collants."
+    expl: "L'ORI (Origin of Replication) est la séquence qui permet au plasmide de se répliquer de façon autonome dans la bactérie hôte, indépendamment du chromosome."
   },
   {
-    q: "La pureté acceptable d'un échantillon d'ADN (ratio A₂₆₀/A₂₈₀) est supérieure à :",
-    opts: ["> 1", "> 1,5", "> 2", "> 3"],
-    ans: 2,
-    expl: "Un ratio A₂₆₀/A₂₈₀ > 2 indique un ADN pur. En dessous, il y a contamination protéique (les protéines absorbent à 280 nm)."
-  },
-  {
-    q: "À quelle température se fait l'hybridation des amorces lors d'un cycle PCR ?",
-    opts: ["95°C", "72°C", "40–70°C", "4°C"],
-    ans: 2,
-    expl: "L'hybridation (annealing) se fait entre 40 et 70°C selon le Tm des amorces. 95°C = dénaturation, 72°C = élongation (Taq polymérase)."
-  },
-  {
-    q: "Quelle technique de Blot permet de détecter de l'ARN ?",
-    opts: ["Southern Blot", "Western Blot", "Northern Blot", "RFLP"],
-    ans: 2,
-    expl: "Southern = ADN · Northern = ARN · Western = protéines. Le Northern Blot nécessite de prendre garde aux RNases."
-  },
-  {
-    q: "Quel vecteur peut accueillir des inserts de 100 à 1000 kpb ?",
-    opts: ["Plasmide", "Cosmide", "Phage λ", "YAC"],
-    ans: 3,
-    expl: "Le YAC (Yeast Artificial Chromosome) est le vecteur à plus grande capacité : 100–1000 kpb. Le plasmide ≤10 kpb, cosmide 10–50 kpb, phage 10–20 kpb."
-  },
-  {
-    q: "Dans un SDS-PAGE, les protéines sont séparées selon :",
-    opts: ["Leur charge électrique", "Leur taille (masse moléculaire)", "Leur pH isoélectrique", "Leur couleur"],
+    q: "Pourquoi ne peut-on pas exprimer directement un gène humain dans une bactérie avec un vecteur d'expression ?",
+    opts: ["Les bactéries manquent d'ATP", "Les bactéries ne possèdent pas la machinerie d'épissage des introns", "Les bactéries n'ont pas de ribosomes", "Les gènes humains sont trop courts"],
     ans: 1,
-    expl: "Le SDS neutralise les charges propres de toutes les protéines. La migration dépend alors uniquement de la taille (MM)."
+    expl: "Les gènes eucaryotes contiennent des introns. Les bactéries ne possèdent pas le spliceosome pour les éliminer. Il faut utiliser l'ADNc (sans introns) obtenu par transcriptase réverse."
   },
   {
-    q: "La transcriptase réverse permet de convertir :",
-    opts: ["ADN → ARN", "Protéine → ADN", "ARN → ADNc", "ADNc → protéine"],
-    ans: 2,
-    expl: "La transcriptase réverse synthétise un ADN complémentaire (ADNc) à partir d'un ARN messager. C'est la base de la RT-PCR."
-  },
-  {
-    q: "CRISPR-Cas9 est principalement utilisé pour :",
-    opts: ["Amplifier l'ADN par PCR", "Séquencer un ARN", "Éditer précisément le génome", "Purifier des protéines"],
-    ans: 2,
-    expl: "CRISPR-Cas9 fonctionne comme des 'ciseaux moléculaires' guidés par un ARN guide pour couper l'ADN à un site précis et modifier le génome."
-  },
-  {
-    q: "Dans un gel 2D-PAGE, l'axe X (1re dimension) correspond à :",
-    opts: ["La masse moléculaire (MM)", "Le pH isoélectrique (pHi)", "La taille en kpb", "La charge totale SDS"],
+    q: "Le lysozyme est utilisé lors de la lyse cellulaire pour :",
+    opts: ["Précipiter les protéines", "Dégrader la paroi cellulaire bactérienne", "Inhiber les DNases", "Dissoudre les membranes lipidiques"],
     ans: 1,
-    expl: "La 1re dimension est l'IEF (isoélectrofocalisation) → axe X = pHi. La 2e dimension est un SDS-PAGE → axe Y = MM."
+    expl: "Le lysozyme est une enzyme qui clive les liaisons du peptidoglycane constituant la paroi des bactéries, provoquant leur lyse osmotique."
   },
   {
-    q: "La PCR en temps réel (qPCR) est caractérisée par :",
-    opts: ["L'utilisation de ddNTP", "Une détection fluorescente quantitative", "2 PCR successives", "Un séquençage direct du produit"],
+    q: "En électrophorèse agarose, les petits fragments d'ADN migrent :",
+    opts: ["Plus lentement que les grands fragments", "À la même vitesse que les grands fragments", "Plus vite que les grands fragments", "Vers la cathode (−)"],
+    ans: 2,
+    expl: "Les petits fragments rencontrent moins de résistance dans le gel et migrent donc plus vite et plus loin vers l'anode (+). Les grands fragments sont ralentis par le maillage du gel."
+  },
+  {
+    q: "Qu'est-ce que la métagénomique (NGS) ?",
+    opts: ["Le séquençage d'un seul organisme modèle", "L'analyse de l'ADN de tous les organismes présents dans un environnement", "La modification du génome par CRISPR", "Le séquençage des protéines d'un tissu"],
     ans: 1,
-    expl: "La qPCR utilise des sondes/intercalants fluorescents (ex. SYBR Green) pour quantifier l'ADN en temps réel. Le signal augmente à chaque cycle."
+    expl: "La métagénomique consiste à séquencer l'ensemble de l'ADN présent dans un échantillon environnemental (sol, eau, intestin…) sans cultiver les organismes — possible grâce au NGS."
   },
   {
-    q: "Quel agent brise les ponts disulfure (S–S) lors de l'extraction protéique ?",
-    opts: ["Urée", "Triton X-100", "DTT", "Lysozyme"],
-    ans: 2,
-    expl: "Le DTT (dithiothréitol) est un agent réducteur qui brise les ponts disulfure entre cystéines, permettant de déplier les protéines."
-  },
-  {
-    q: "L'immunité adaptative est caractérisée par :",
-    opts: ["Une réponse immédiate non spécifique", "L'absence totale de mémoire", "La spécificité antigénique et la mémoire immunologique", "Uniquement les macrophages"],
-    ans: 2,
-    expl: "L'immunité adaptative est spécifique à l'antigène et crée une mémoire (LB et LT mémoires) pour une réponse plus rapide lors d'une 2e exposition."
-  },
-  {
-    q: "Dans un Western Blot, la détection spécifique de la protéine se fait via :",
-    opts: ["PFGE et 4 électrodes", "Un anticorps primaire puis secondaire", "Des ddNTP marqués", "Une enzyme de restriction"],
+    q: "Quel est le rôle de l'ARN guide (ARNg) dans le système CRISPR-Cas9 ?",
+    opts: ["Couper l'ADN directement", "Guider la protéine Cas9 vers la séquence cible spécifique", "Synthétiser le brin complémentaire", "Transcrire le gène ciblé"],
     ans: 1,
-    expl: "L'Ac primaire reconnaît la protéine cible. L'Ac secondaire (anti-Ig) couplé à une enzyme ou fluorophore permet la révélation."
+    expl: "L'ARNg est complémentaire de la séquence d'ADN cible. Il forme un complexe avec Cas9 et dirige la nucléase précisément vers la bonne séquence pour effectuer la coupure double brin."
   },
   {
-    q: "Quelle technique NGS utilise un brin simple + adaptateurs + nucléotides fluorescents ?",
-    opts: ["Séquençage Sanger", "PFGE", "Séquençage SOLEXA (Illumina)", "RFLP"],
+    q: "Qu'est-ce que le pH isoélectrique (pHi) d'une protéine ?",
+    opts: ["Le pH auquel la protéine précipite dans le gel", "Le pH auquel la protéine est totalement chargée positivement", "Le pH auquel la charge nette de la protéine est nulle", "Le pH optimal de l'activité enzymatique"],
     ans: 2,
-    expl: "SOLEXA (plateforme Illumina) est un séquençage par synthèse : les brins simples avec adaptateurs sont séquencés via incorporation de nucléotides fluorescents."
+    expl: "Au pHi, une protéine possède autant de charges positives que négatives → charge nette = 0. Elle ne migre plus dans un champ électrique. C'est le principe de l'IEF."
   },
   {
-    q: "La formule du Rf en SDS-PAGE est :",
-    opts: [
-      "distance migration ÷ distance bleu de bromophénol",
-      "A₂₆₀ ÷ A₂₈₀",
-      "Taille de l'insert ÷ taille du vecteur",
-      "pHi × masse moléculaire"
-    ],
-    ans: 0,
-    expl: "Rf = (distance de migration de la protéine) ÷ (distance de migration du bleu de bromophénol, front de migration). Rf entre 0 et 1."
+    q: "La 2D-DIGE (Differential In-Gel Electrophoresis) est utilisée pour :",
+    opts: ["Séquencer les spots protéiques", "Comparer quantitativement deux échantillons protéiques sur un même gel", "Amplifier les protéines d'intérêt", "Détecter les ARN messagers"],
+    ans: 1,
+    expl: "En 2D-DIGE, deux échantillons sont marqués avec des fluorophores différents (Cy3 et Cy5), puis séparés sur le même gel 2D. La comparaison des intensités permet une quantification relative."
+  },
+  {
+    q: "Quel est le rôle de l'urée dans l'extraction protéique ?",
+    opts: ["Inhiber les protéases", "Briser les ponts disulfure", "Dénaturer et solubiliser les protéines (agent chaotrope)", "Colorer les protéines pour les détecter"],
+    ans: 2,
+    expl: "L'urée est un agent chaotrope : elle perturbe les interactions hydrophobes et les liaisons hydrogène, déstabilisant la structure 3D des protéines et les maintenant en solution."
+  },
+  {
+    q: "Quelle est la différence principale entre amorce et sonde ?",
+    opts: ["L'amorce est plus longue que la sonde", "La sonde est marquée par un fluorophore, l'amorce ne l'est pas", "L'amorce sert uniquement à la détection, la sonde à l'amplification", "Il n'y a aucune différence"],
+    ans: 1,
+    expl: "Une amorce est un oligonucléotide non marqué servant de point de départ à l'élongation. Une sonde est une amorce marquée (fluorophore, radioactivité…) permettant en plus la détection du signal."
+  },
+  {
+    q: "Les lymphocytes T CD8+ sont aussi appelés lymphocytes :",
+    opts: ["Helper (auxiliaires)", "Régulateurs", "Cytotoxiques", "B mémoires"],
+    ans: 2,
+    expl: "Les LT CD8+ (cytotoxiques) reconnaissent les cellules infectées ou tumorales via le CMH de classe I et les détruisent directement. Les LT CD4+ sont les helper."
+  },
+  {
+    q: "Lors d'un séquençage Sanger, les ddNTP provoquent :",
+    opts: ["Une dénaturation de l'ADN matrice", "Un arrêt aléatoire de l'élongation générant des fragments de toutes tailles", "Une amplification exponentielle", "Une coupure des sites palindromiques"],
+    ans: 1,
+    expl: "Les ddNTP (didésoxynucléotides) n'ont pas de groupement 3'-OH → impossible d'ajouter un nucléotide suivant. Chaque incorporation stoppe la synthèse, générant des fragments de longueurs différentes permettant la lecture de la séquence."
+  },
+  {
+    q: "En Nested PCR, pourquoi utilise-t-on deux paires d'amorces successives ?",
+    opts: ["Pour amplifier deux gènes différents simultanément", "Pour augmenter la spécificité et éliminer les produits non spécifiques de la 1re PCR", "Pour accélérer le cycle d'élongation", "Pour séquencer directement le produit"],
+    ans: 1,
+    expl: "La 2e paire d'amorces amplifie une région interne au produit de la 1re PCR. Si un amplicon non spécifique s'est formé, il ne contiendra pas les sites de liaison des amorces internes → éliminé."
+  },
+  {
+    q: "Quelle cellule de l'immunité innée est spécialisée dans la phagocytose des pathogènes ?",
+    opts: ["Lymphocyte B", "Plasmocyte", "Macrophage", "Lymphocyte T CD4+"],
+    ans: 2,
+    expl: "Les macrophages sont des phagocytes professionnels de l'immunité innée. Ils englobent et digèrent les pathogènes, et présentent aussi des antigènes aux lymphocytes T (immunité adaptative)."
+  },
+  {
+    q: "Le polylinker (MCS) d'un vecteur de clonage sert à :",
+    opts: ["Permettre la réplication du vecteur dans la bactérie", "Concentrer plusieurs sites de restriction pour faciliter l'insertion de l'ADN étranger", "Conférer la résistance aux antibiotiques", "Initier la traduction de la protéine d'intérêt"],
+    ans: 1,
+    expl: "Le MCS (Multiple Cloning Site ou polylinker) regroupe de nombreux sites de restriction uniques côte à côte. On choisit l'enzyme compatible avec l'insert pour le cloner facilement dans le vecteur."
   },
 ];
 
