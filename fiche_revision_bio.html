@@ -1169,94 +1169,94 @@ const SECTION_LABELS = [
 
 const QUESTIONS = [
   {
-    q: "À quoi sert l'ORI dans un plasmide ?",
-    opts: ["Conférer la résistance aux antibiotiques", "Permettre la réplication autonome du plasmide", "Accueillir l'insert étranger", "Démarrer la transcription"],
+    q: "Qu'est-ce qu'un amplicon en PCR ?",
+    opts: ["Une amorce fluorescente", "Le produit obtenu après amplification par PCR", "Un vecteur de clonage", "Une enzyme thermorésistante"],
     ans: 1,
-    expl: "L'ORI (Origin of Replication) est la séquence qui permet au plasmide de se répliquer de façon autonome dans la bactérie hôte, indépendamment du chromosome."
+    expl: "L'amplicon est le fragment d'ADN produit et multiplié au cours des cycles PCR. Sa taille est déterminée par la position des deux amorces encadrant la séquence cible."
   },
   {
-    q: "Pourquoi ne peut-on pas exprimer directement un gène humain dans une bactérie avec un vecteur d'expression ?",
-    opts: ["Les bactéries manquent d'ATP", "Les bactéries ne possèdent pas la machinerie d'épissage des introns", "Les bactéries n'ont pas de ribosomes", "Les gènes humains sont trop courts"],
+    q: "Pourquoi la Taq polymérase est-elle utilisée en PCR plutôt qu'une polymérase classique ?",
+    opts: ["Elle est moins coûteuse", "Elle est thermorésistante et reste active à 95°C lors de la dénaturation", "Elle n'a pas besoin d'amorces", "Elle amplifie directement l'ARN"],
     ans: 1,
-    expl: "Les gènes eucaryotes contiennent des introns. Les bactéries ne possèdent pas le spliceosome pour les éliminer. Il faut utiliser l'ADNc (sans introns) obtenu par transcriptase réverse."
+    expl: "La Taq polymérase est extraite de Thermus aquaticus, une bactérie des sources hydrothermales. Elle résiste aux cycles de dénaturation à 95°C qui détruiraient une polymérase classique."
   },
   {
-    q: "Le lysozyme est utilisé lors de la lyse cellulaire pour :",
-    opts: ["Précipiter les protéines", "Dégrader la paroi cellulaire bactérienne", "Inhiber les DNases", "Dissoudre les membranes lipidiques"],
+    q: "Lors d'un Southern Blot, pourquoi doit-on dénaturer l'ADN avant l'hybridation ?",
+    opts: ["Pour accélérer la migration dans le gel", "Pour que l'ADN puisse s'hybrider avec la sonde simple brin", "Pour augmenter sa charge négative", "Pour le marquer avec un fluorophore"],
     ans: 1,
-    expl: "Le lysozyme est une enzyme qui clive les liaisons du peptidoglycane constituant la paroi des bactéries, provoquant leur lyse osmotique."
+    expl: "La sonde est simple brin. Pour qu'elle puisse s'hybrider par complémentarité, l'ADN cible (double brin) doit être dénaturé au préalable pour exposer ses bases."
   },
   {
-    q: "En électrophorèse agarose, les petits fragments d'ADN migrent :",
-    opts: ["Plus lentement que les grands fragments", "À la même vitesse que les grands fragments", "Plus vite que les grands fragments", "Vers la cathode (−)"],
+    q: "Qu'analyse-t-on grâce aux puces à ADN (microarrays) ?",
+    opts: ["La séquence complète d'un gène inconnu", "L'ensemble des gènes exprimés dans un tissu (transcriptome)", "Les mutations sur sites de restriction", "La masse moléculaire des protéines"],
+    ans: 1,
+    expl: "Les puces à ADN permettent d'analyser simultanément l'expression de milliers de gènes (ARNm marqués hybridés sur des sondes fixées). C'est une approche transcriptomique à haut débit."
+  },
+  {
+    q: "Quel est l'avantage du vecteur phagique (phage λ) par rapport au plasmide pour le clonage ?",
+    opts: ["Il accepte des inserts jusqu'à 1000 kpb", "Il s'introduit dans la bactérie par injection directe et accepte jusqu'à 20 kpb", "Il ne nécessite pas de gène de résistance", "Il se réplique dans les cellules animales"],
+    ans: 1,
+    expl: "Le phage λ infecte la bactérie par injection directe de son ADN (pas de transformation nécessaire) et peut accueillir des inserts de 10 à 20 kpb, contre ≤10 kpb pour le plasmide."
+  },
+  {
+    q: "Le gène de résistance aux antibiotiques dans un plasmide sert principalement à :",
+    opts: ["Accélérer la réplication du plasmide", "Sélectionner les bactéries ayant bien intégré le plasmide", "Permettre l'insertion de l'ADN étranger", "Produire la protéine d'intérêt"],
+    ans: 1,
+    expl: "Seules les bactéries ayant intégré le plasmide pourront survivre en présence de l'antibiotique. C'est un marqueur de sélection essentiel pour identifier les clones recombinants."
+  },
+  {
+    q: "En IEF, que se passe-t-il lorsqu'une protéine atteint sa zone de pHi dans le gradient ?",
+    opts: ["Elle accélère dans la même direction", "Elle est dégradée par le champ électrique", "Sa charge nette devient nulle et elle s'immobilise", "Elle change de taille"],
     ans: 2,
-    expl: "Les petits fragments rencontrent moins de résistance dans le gel et migrent donc plus vite et plus loin vers l'anode (+). Les grands fragments sont ralentis par le maillage du gel."
+    expl: "Au pHi, la protéine est électriquement neutre (charges + = charges −). Elle ne ressent plus la force du champ électrique et se focalise à cette position dans le gradient. C'est le principe de focalisation."
   },
   {
-    q: "Qu'est-ce que la métagénomique (NGS) ?",
-    opts: ["Le séquençage d'un seul organisme modèle", "L'analyse de l'ADN de tous les organismes présents dans un environnement", "La modification du génome par CRISPR", "Le séquençage des protéines d'un tissu"],
-    ans: 1,
-    expl: "La métagénomique consiste à séquencer l'ensemble de l'ADN présent dans un échantillon environnemental (sol, eau, intestin…) sans cultiver les organismes — possible grâce au NGS."
-  },
-  {
-    q: "Quel est le rôle de l'ARN guide (ARNg) dans le système CRISPR-Cas9 ?",
-    opts: ["Couper l'ADN directement", "Guider la protéine Cas9 vers la séquence cible spécifique", "Synthétiser le brin complémentaire", "Transcrire le gène ciblé"],
-    ans: 1,
-    expl: "L'ARNg est complémentaire de la séquence d'ADN cible. Il forme un complexe avec Cas9 et dirige la nucléase précisément vers la bonne séquence pour effectuer la coupure double brin."
-  },
-  {
-    q: "Qu'est-ce que le pH isoélectrique (pHi) d'une protéine ?",
-    opts: ["Le pH auquel la protéine précipite dans le gel", "Le pH auquel la protéine est totalement chargée positivement", "Le pH auquel la charge nette de la protéine est nulle", "Le pH optimal de l'activité enzymatique"],
+    q: "Le Triton X-100 est utilisé dans l'extraction protéique pour :",
+    opts: ["Précipiter les acides nucléiques", "Inhiber les protéases", "Solubiliser les protéines membranaires (détergent doux non dénaturant)", "Briser les liaisons covalentes des protéines"],
     ans: 2,
-    expl: "Au pHi, une protéine possède autant de charges positives que négatives → charge nette = 0. Elle ne migre plus dans un champ électrique. C'est le principe de l'IEF."
+    expl: "Le Triton X-100 est un détergent non ionique doux qui solubilise les membranes lipidiques pour libérer les protéines membranaires sans les dénaturer, contrairement au SDS."
   },
   {
-    q: "La 2D-DIGE (Differential In-Gel Electrophoresis) est utilisée pour :",
-    opts: ["Séquencer les spots protéiques", "Comparer quantitativement deux échantillons protéiques sur un même gel", "Amplifier les protéines d'intérêt", "Détecter les ARN messagers"],
-    ans: 1,
-    expl: "En 2D-DIGE, deux échantillons sont marqués avec des fluorophores différents (Cy3 et Cy5), puis séparés sur le même gel 2D. La comparaison des intensités permet une quantification relative."
-  },
-  {
-    q: "Quel est le rôle de l'urée dans l'extraction protéique ?",
-    opts: ["Inhiber les protéases", "Briser les ponts disulfure", "Dénaturer et solubiliser les protéines (agent chaotrope)", "Colorer les protéines pour les détecter"],
+    q: "L'immunité humorale désigne la réponse immunitaire médiée par :",
+    opts: ["Les lymphocytes T cytotoxiques (CD8+)", "Les macrophages et les cellules NK", "Les anticorps produits par les plasmocytes (issus des LB)", "Le complément uniquement"],
     ans: 2,
-    expl: "L'urée est un agent chaotrope : elle perturbe les interactions hydrophobes et les liaisons hydrogène, déstabilisant la structure 3D des protéines et les maintenant en solution."
+    expl: "L'immunité humorale repose sur les anticorps (immunoglobulines) sécrétés par les plasmocytes, différenciés à partir des lymphocytes B activés par l'antigène."
   },
   {
-    q: "Quelle est la différence principale entre amorce et sonde ?",
-    opts: ["L'amorce est plus longue que la sonde", "La sonde est marquée par un fluorophore, l'amorce ne l'est pas", "L'amorce sert uniquement à la détection, la sonde à l'amplification", "Il n'y a aucune différence"],
+    q: "Quelle est la fonction du CMH (Complexe Majeur d'Histocompatibilité) ?",
+    opts: ["Phagocyter les pathogènes", "Présenter des fragments d'antigènes aux lymphocytes T pour déclencher la réponse adaptative", "Produire des anticorps", "Lyser directement les cellules infectées"],
     ans: 1,
-    expl: "Une amorce est un oligonucléotide non marqué servant de point de départ à l'élongation. Une sonde est une amorce marquée (fluorophore, radioactivité…) permettant en plus la détection du signal."
+    expl: "Le CMH de classe I présente les peptides intracellulaires aux LT CD8+ ; le CMH de classe II présente les peptides extracellulaires aux LT CD4+. Sans CMH, pas de réponse T spécifique."
   },
   {
-    q: "Les lymphocytes T CD8+ sont aussi appelés lymphocytes :",
-    opts: ["Helper (auxiliaires)", "Régulateurs", "Cytotoxiques", "B mémoires"],
+    q: "Quel type de bouts d'ADN facilite le plus le clonage directionnel dans un vecteur ?",
+    opts: ["Bouts francs, car ils s'assemblent avec n'importe quel bout", "Bouts collants, car leurs surplombs complémentaires permettent une ligation orientée et spécifique", "ADN circulaire fermé covalemment", "ADN méthylé"],
+    ans: 1,
+    expl: "Les bouts collants ont des surplombs simple brin complémentaires qui s'hybrident spontanément. En utilisant deux enzymes différentes (clonage directionnel), l'insert ne peut s'insérer que dans un seul sens."
+  },
+  {
+    q: "Qu'est-ce que la RT-PCR permet de démontrer expérimentalement ?",
+    opts: ["La taille d'un fragment d'ADN génomique", "Qu'un gène est transcrit (exprimé) dans un tissu donné", "La structure tertiaire d'une protéine", "La présence d'un site de restriction"],
+    ans: 1,
+    expl: "La RT-PCR convertit l'ARNm en ADNc (via la transcriptase réverse) puis l'amplifie. Si le produit PCR est obtenu, cela prouve que le gène était bien transcrit dans le tissu étudié."
+  },
+  {
+    q: "Dans le cycle PCR, quel est le rôle précis de l'étape à 72°C ?",
+    opts: ["Séparer les deux brins d'ADN", "Permettre aux amorces de s'hybrider sur la cible", "Permettre à la Taq polymérase de synthétiser le nouveau brin d'ADN", "Dénaturer les protéines contaminantes"],
     ans: 2,
-    expl: "Les LT CD8+ (cytotoxiques) reconnaissent les cellules infectées ou tumorales via le CMH de classe I et les détruisent directement. Les LT CD4+ sont les helper."
+    expl: "72°C est la température optimale de la Taq polymérase pour l'élongation. Elle lit le brin matrice et incorpore les nucléotides libres (dNTPs) pour synthétiser le brin complémentaire dans le sens 5'→3'."
   },
   {
-    q: "Lors d'un séquençage Sanger, les ddNTP provoquent :",
-    opts: ["Une dénaturation de l'ADN matrice", "Un arrêt aléatoire de l'élongation générant des fragments de toutes tailles", "Une amplification exponentielle", "Une coupure des sites palindromiques"],
+    q: "Comment les plasmocytes sont-ils produits dans l'organisme ?",
+    opts: ["Par différenciation des lymphocytes T CD4+ activés", "Par différenciation des lymphocytes B activés par un antigène spécifique", "Par multiplication des macrophages", "Par activation des cellules NK"],
     ans: 1,
-    expl: "Les ddNTP (didésoxynucléotides) n'ont pas de groupement 3'-OH → impossible d'ajouter un nucléotide suivant. Chaque incorporation stoppe la synthèse, générant des fragments de longueurs différentes permettant la lecture de la séquence."
+    expl: "Lors de la réponse humorale, un lymphocyte B reconnaît son antigène spécifique (avec l'aide des LT CD4+), prolifère et se différencie en plasmocytes qui sécrètent massivement des anticorps."
   },
   {
-    q: "En Nested PCR, pourquoi utilise-t-on deux paires d'amorces successives ?",
-    opts: ["Pour amplifier deux gènes différents simultanément", "Pour augmenter la spécificité et éliminer les produits non spécifiques de la 1re PCR", "Pour accélérer le cycle d'élongation", "Pour séquencer directement le produit"],
+    q: "Qu'est-ce qui différencie principalement le cosmide du plasmide ?",
+    opts: ["Le cosmide ne possède pas de gène de résistance", "Le cosmide peut accueillir des inserts de 10 à 50 kpb grâce à des séquences cos du phage λ", "Le cosmide se réplique uniquement dans les levures", "Le cosmide ne contient pas d'ORI"],
     ans: 1,
-    expl: "La 2e paire d'amorces amplifie une région interne au produit de la 1re PCR. Si un amplicon non spécifique s'est formé, il ne contiendra pas les sites de liaison des amorces internes → éliminé."
-  },
-  {
-    q: "Quelle cellule de l'immunité innée est spécialisée dans la phagocytose des pathogènes ?",
-    opts: ["Lymphocyte B", "Plasmocyte", "Macrophage", "Lymphocyte T CD4+"],
-    ans: 2,
-    expl: "Les macrophages sont des phagocytes professionnels de l'immunité innée. Ils englobent et digèrent les pathogènes, et présentent aussi des antigènes aux lymphocytes T (immunité adaptative)."
-  },
-  {
-    q: "Le polylinker (MCS) d'un vecteur de clonage sert à :",
-    opts: ["Permettre la réplication du vecteur dans la bactérie", "Concentrer plusieurs sites de restriction pour faciliter l'insertion de l'ADN étranger", "Conférer la résistance aux antibiotiques", "Initier la traduction de la protéine d'intérêt"],
-    ans: 1,
-    expl: "Le MCS (Multiple Cloning Site ou polylinker) regroupe de nombreux sites de restriction uniques côte à côte. On choisit l'enzyme compatible avec l'insert pour le cloner facilement dans le vecteur."
+    expl: "Le cosmide est un plasmide hybride contenant les séquences cos du phage λ. Grâce à elles, il peut être conditionné en particule phagique pour infecter les bactéries, avec une capacité d'insert de 10–50 kpb."
   },
 ];
 
